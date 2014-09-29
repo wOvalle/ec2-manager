@@ -7,7 +7,7 @@ angular.module('awsTestApp')
       'link': '/'
     },
         {
-            'title': 'Ec2',
+            'title': 'ec2',
             'link': '/ec2-instances'
         }];
 
