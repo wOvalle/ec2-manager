@@ -5,7 +5,11 @@ angular.module('awsTestApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
-    }];
+    },
+        {
+            'title': 'Ec2',
+            'link': '/ec2-instances'
+        }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
