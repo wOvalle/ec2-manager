@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('awsTestApp')
-  .controller('Ec2InstancesCtrl', function ($scope) {
-$scope.message = "hola";
+  .controller('Ec2InstancesCtrl', function ($scope, amazonCreds) {
+$scope.message = amazonCreds.key;
         //TODO: Remove hardcoded credentials
   AWS.config.update({accessKeyId: '', secretAccessKey: ''});
   AWS.config.region= 'us-east-1';
