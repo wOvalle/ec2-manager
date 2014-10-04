@@ -4,7 +4,7 @@
 var myApp = angular.module('awsTestApp');
 myApp.factory('amazonCreds', function() {
     return {
-        key : '---',
-        secret: '---'
+        key : '-',
+        secret: '-'
     };
 });

@@ -2,10 +2,10 @@
 
 angular.module('awsTestApp')
   .controller('Ec2InstancesCtrl', function ($scope, amazonCreds) {
-$scope.message = amazonCreds.key;
-        //TODO: Remove hardcoded credentials
-  AWS.config.update({accessKeyId: '', secretAccessKey: ''});
-  AWS.config.region= 'us-east-1';
+
+  AWS.config.update({accessKeyId: amazonCreds.key, secretAccessKey: amazonCreds.secret});
+
+        AWS.config.region= 'us-east-1';
         var bucket = new AWS.S3({params: {Bucket: 'ec2-manager'}});
         $scope.objects = [];
         this.variable = "variable123";
