@@ -3,21 +3,21 @@
 var ec2 = require('./ec2Instances.model');
 var aws = require('aws-sdk');
 
+
 // Get list of ec2Instancess
 exports.index = function(req, res) {
     var arr = [];
-    aws.config.region = 'us-east-1';
-    var bucket = new aws.S3({params: {Bucket: 'ec2-manager'}});
 
-    bucket.listObjects(function (err, data) {
-        if(err)
-            handleError(res,err);
-        else {
+    var ec2 = new aws.EC2({apiVersion: '2014-06-15'});
+
+    var params = {};
+
+    ec2.describeInstances(params, function(err, data) {
+        if (err)
+            handleError(res,err); // an error occurred
+        else { // successful response
             if(!data) handleError(res,err);
-            for (var i = 0; i < data.Contents.length; i++) {
-                arr.push(data.Contents[i].Key);
-            }
-            return res.json(200, arr);
+            res.json(data);
         }
     });
 
@@ -25,8 +25,22 @@ exports.index = function(req, res) {
 
 // Get a single ec2Instances
 exports.show = function(req, res) {
-    var arr = ['hola', 'adios'];
-    return res.json(arr[req.params.id]);
+    var params = {};
+    params.InstanceIds = [];
+    params.InstanceIds.push(req.params.id);
+
+    var ec2 = new aws.EC2({apiVersion: '2014-06-15'});
+
+    ec2.describeInstances(params, function(err, data) {
+        if (err)
+            handleError(res,err); // an error occurred
+        else { // successful response
+            if(!data) handleError(res,err);
+            res.json(data);
+        }
+    });
+
+
 
 };
 
@@ -53,7 +67,7 @@ exports.update = function(req, res) {
 };
 
 // Deletes a ec2Instances from the DB.
-exports.destroy = function(req, res) {
+exports.terminate = function(req, res) {
     ec2.findById(req.params.id, function (err, ec2Instances) {
         if(err) { return handleError(res, err); }
         if(!ec2Instances) { return res.send(404); }
