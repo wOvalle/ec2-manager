@@ -5,8 +5,22 @@ var aws = require('aws-sdk');
 
 // Get list of ec2Instancess
 exports.index = function(req, res) {
-    var arr = ['test'];
-    return res.json(200, arr);
+    var arr = [];
+    aws.config.region = 'us-east-1';
+    var bucket = new aws.S3({params: {Bucket: 'ec2-manager'}});
+
+    bucket.listObjects(function (err, data) {
+        if(err)
+            handleError(res,err);
+        else {
+            if(!data) handleError(res,err);
+            for (var i = 0; i < data.Contents.length; i++) {
+                arr.push(data.Contents[i].Key);
+            }
+            return res.json(200, arr);
+        }
+    });
+
 };
 
 // Get a single ec2Instances
