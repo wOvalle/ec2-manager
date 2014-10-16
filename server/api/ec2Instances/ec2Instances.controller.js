@@ -39,42 +39,37 @@ exports.show = function(req, res) {
             res.json(data);
         }
     });
-
-
-
 };
 
 // Creates a new ec2Instances in the DB.
 exports.create = function(req, res) {
-    ec2.create(req.body, function(err, ec2Instances) {
-        if(err) { return handleError(res, err); }
-        return res.json(201, ec2Instances);
-    });
-};
-
-// Updates an existing ec2Instances in the DB.
-exports.update = function(req, res) {
-    if(req.body._id) { delete req.body._id; }
-    ec2.findById(req.params.id, function (err, ec2Instances) {
-        if (err) { return handleError(res, err); }
-        if(!ec2Instances) { return res.send(404); }
-        var updated = _.merge(ec2Instances, req.body);
-        updated.save(function (err) {
-            if (err) { return handleError(res, err); }
-            return res.json(200, ec2Instances);
-        });
-    });
+    //TODO: code to create an instance
 };
 
 // Deletes a ec2Instances from the DB.
 exports.terminate = function(req, res) {
-    ec2.findById(req.params.id, function (err, ec2Instances) {
-        if(err) { return handleError(res, err); }
-        if(!ec2Instances) { return res.send(404); }
-        ec2Instances.remove(function(err) {
-            if(err) { return handleError(res, err); }
-            return res.send(204);
-        });
+    var params = {};
+    params.InstanceIds = [];
+    params.InstanceIds.push(req.params.id);
+
+    ec2.terminateInstances(params, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else     console.log(data);           // successful response
+    });
+};
+
+// Stop a ec2Instance
+exports.stop = function(req, res) {
+    var params = {};
+    params.InstanceIds = [];
+    params.InstanceIds.push(req.params.id);
+
+    ec2.stopInstances(params, function(err, data) {
+        if (err) handleError(res,err); // an error occurred
+        else {
+            if (!data) handleError(res, err);
+            res.json(data);          // successful response
+        }
     });
 };
 
