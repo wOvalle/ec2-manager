@@ -9,6 +9,6 @@ router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.delete('/:id', controller.terminate);
-router.post('/:id', controller.stop);
+router.put('/:id', controller.stop);
 
 module.exports = router;
