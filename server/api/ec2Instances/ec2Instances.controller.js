@@ -6,20 +6,23 @@ var aws = require('aws-sdk');
 
 // Get list of ec2Instancess
 exports.index = function(req, res) {
-    var arr = [];
 
-    var ec2 = new aws.EC2({apiVersion: '2014-06-15'});
+        var ec2 = new aws.EC2({apiVersion: '2014-06-15'});
 
-    var params = {};
+        var params = {};
 
-    ec2.describeInstances(params, function(err, data) {
-        if (err)
-            handleError(res,err); // an error occurred
-        else { // successful response
-            if(!data) handleError(res,err);
-            res.json(data);
-        }
-    });
+        ec2.describeInstances(params, function(err, data) {
+            if (err)
+                handleError(res,err); // an error occurred
+            else { // successful response
+                if(!data) handleError(res,err);
+                console.log(data.Reservations);
+                res.json(data);
+            }
+        });
+
+
+
 
 };
 
@@ -28,6 +31,7 @@ exports.show = function(req, res) {
     var params = {};
     params.InstanceIds = [];
     params.InstanceIds.push(req.params.id);
+//    params.InstanceIds.push('i-3ca15fd7');
 
     var ec2 = new aws.EC2({apiVersion: '2014-06-15'});
 
