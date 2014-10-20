@@ -1,5 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<script type="text/ng-template" id="modal.html">
+
+<script type="text/ng-template" id="instance.html">
     <div class="modal-header">
         <h3>Fetching data from AWS</h3>
     </div>
@@ -17,8 +18,8 @@
             {{instance.Instances[0].KeyName}}
             <span class="badge" tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</span>
             <br>
-            <a href ng-click="stop()">Stop Instance</a> <a href ng-click="terminate()" class="bg-danger">Terminate
-            Instance</a>
+            <button type="button" class="btn btn-warning" ng-click="stop(instance)">Stop</button>
+            <button type="button" class="btn btn-danger" ng-click="terminate(instance)">Terminate</button>
         </div>
     </div>
 </div>
