@@ -3,17 +3,13 @@
 angular.module('awsTestApp')
     .controller('Ec2InstancesCtrl', function ($scope, awsFactory, $modal) {
         $scope.instances = [];
-
-        var loadingModal = $modal.open({
+        var loadingModal;
+        var singleInstanceModal;
+        loadingModal = $modal.open({
             templateUrl: 'app/ec2-instances/loading.html',
             size: 'sm',
             backdrop: 'static',
-            keyboard: false,
-            resolve: {
-                items: function () {
-                    return $scope.items;
-                }
-            }
+            keyboard: false
         });
 
         awsFactory.getInstances.get(function (data) {
@@ -26,19 +22,33 @@ angular.module('awsTestApp')
 
                 $scope.instances.push(res);
             });
-
         });
 
-        $scope.terminate = function (i) {
-            alert('Terminate ' + i.Instances[0].KeyName);
-        }
-
-        $scope.stop = function (i) {
-            alert('Stop ' + i.Instances[0].KeyName);
-        }
-
-        $scope.details = function () {
-            alert('Details');
+        $scope.details = function (ins) {
+            $scope.selectedInstance = ins;
+            singleInstanceModal = $modal.open({
+                templateUrl: 'app/ec2-instances/instance.html',
+                size: 'sm',
+                controller: 'instanceModalCtrl',
+                resolve: {
+                    instance: function () {
+                        return $scope.selectedInstance;
+                    }
+                }
+            });
         }
     }
-);
+)
+
+    .controller('instanceModalCtrl', function ($scope, $modalInstance, instance) {
+        $scope.terminate = function (ins) {
+            alert('Terminate ');
+//            console.log(ins);
+        };
+
+        $scope.stop = function (ins) {
+            alert('Stop ');
+            console.log(ins);
+        };
+
+    });

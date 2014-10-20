@@ -1,20 +1,11 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<script type="text/ng-template" id="instance.html">
-    <div class="modal-header">
-        <h3>Fetching data from AWS</h3>
-    </div>
-    <div class="modal-body">
-        <progressbar class="progress-striped active" max="100" value="100" type="info"></progressbar>
-    </div>
-</script>
-
 <div class="container">
     <p>List of EC2 Instances</p>
 
     <div class="list-group">
         <div ng-repeat="instance in instances" class="list-group-item">
-            <a href="#">{{instance.Instances[0].InstanceName || "Blank name"}}</a> - ID:
+            <a href ng-click="details(instance)">{{instance.Instances[0].InstanceName || "Blank name"}}</a> - ID:
             {{instance.Instances[0].KeyName}}
             <span class="badge" tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</span>
             <br>
