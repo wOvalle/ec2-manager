@@ -18,6 +18,9 @@ You have to create a file called local.env.js in aws-test\server\config with the
 
 After everything is installed, just run `grunt serve` to test the app.
 
+With love, from Dominican Republic. [![From DR to the world!](https://dl.dropboxusercontent.com/u/15293709/dominican_republic_round_icon_64.jpg)]()
+
+
 
 
  
