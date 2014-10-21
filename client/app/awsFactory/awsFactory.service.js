@@ -1,17 +1,32 @@
 'use strict';
 
 angular.module('awsTestApp')
-    .factory('awsFactory', function ($resource) {
-        // Public API here
-        return {
-            getInstances: $resource("/api/ec2Instances", {id: "@id"}),
-            terminateInstance: $resource("/api/ec2Instances/:id", {id: "@id"}),
-            stopInstance: $resource('/api/ec2Instances/:id', { id: '@_id' }, {
-                update: {
-                    method: 'PUT'
-                }
-            })
-        }
+    .factory('awsFactory', function ($http) {
+        var urlBase = '/api/ec2Instances';
+        var awsFactory = {};
+
+        awsFactory.getInstances = function () {
+            return $http.get(urlBase);
+        };
+
+        awsFactory.getInstance = function (id) {
+            return $http.get(urlBase + '/' + id);
+        };
+
+        awsFactory.createInstance = function (ins) {
+            return $http.post(urlBase, ins);
+        };
+
+        awsFactory.stopInstance = function (id, ins) {
+            return $http.put(urlBase + '/' + id, ins)
+        };
+
+        awsFactory.terminateInstance = function (id) {
+            return $http.delete(urlBase + '/' + id);
+        };
+
+        return awsFactory;
+
     });
 
 

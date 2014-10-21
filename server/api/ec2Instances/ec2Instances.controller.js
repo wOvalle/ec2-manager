@@ -56,10 +56,11 @@ exports.terminate = function(req, res) {
     params.InstanceIds = [];
     params.InstanceIds.push(req.params.id);
 
-    ec2.terminateInstances(params, function(err, data) {
-        if (err) console.log(err, err.stack); // an error occurred
-        else     console.log(data);           // successful response
-    });
+//    ec2.terminateInstances(params, function(err, data) {
+//        if (err) console.log(err, err.stack); // an error occurred
+//        else     console.log(data);           // successful response
+//    });
+    console.log('terminate ' + req.params.id);
 };
 
 // Stop a ec2Instance
@@ -68,13 +69,14 @@ exports.stop = function(req, res) {
     params.InstanceIds = [];
     params.InstanceIds.push(req.params.id);
 
-    ec2.stopInstances(params, function(err, data) {
-        if (err) handleError(res,err); // an error occurred
-        else {
-            if (!data) handleError(res, err);
-            res.json(data);          // successful response
-        }
-    });
+//    ec2.stopInstances(params, function(err, data) {
+//        if (err) handleError(res,err); // an error occurred
+//        else {
+//            if (!data) handleError(res, err);
+//            res.json(data);          // successful response
+//        }
+//    });
+    console.log('stop ' + req.params.id);
 };
 
 function handleError(res, err) {
