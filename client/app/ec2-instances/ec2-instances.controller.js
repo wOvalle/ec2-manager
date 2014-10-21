@@ -66,7 +66,8 @@ angular.module('awsTestApp')
         $scope.terminate = function (instance) {
             awsFactory.terminateInstance($rootScope.selectedInstance.Instances[0].InstanceId)
                 .success(function (data) {
-                  alert('Instance terminated');
+                    alert('Instance terminated');
+                    console.log(data);
                 })
                 .error(function (error) {
                     alert('error' + error);
@@ -76,7 +77,7 @@ angular.module('awsTestApp')
         $scope.stop = function (instance) {
             awsFactory.stopInstance($rootScope.selectedInstance.Instances[0].InstanceId)
                 .success(function (data) {
-                    alert('Instance terminated');
+                    alert('Instance stopped');
                 })
                 .error(function (error) {
                     alert('error' + error);

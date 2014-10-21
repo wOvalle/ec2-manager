@@ -8,9 +8,6 @@
             <a href ng-click="details(instance)">{{instance.Instances[0].InstanceName || "Blank name"}}</a> - ID:
             {{instance.Instances[0].KeyName}}
             <span class="badge" tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</span>
-            <br>
-            <button type="button" class="btn btn-warning" ng-click="stop(instance)">Stop</button>
-            <button type="button" class="btn btn-danger" ng-click="terminate(instance)">Terminate</button>
         </div>
     </div>
 </div>
