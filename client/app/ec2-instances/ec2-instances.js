@@ -7,6 +7,6 @@ angular.module('awsTestApp')
         url: '/ec2-instances',
         templateUrl: 'app/ec2-instances/ec2-instances.html',
         controller: 'Ec2InstancesCtrl',
-            controllerAs: 'ec2'
+        controllerAs: 'ec2'
       });
   });

@@ -53,7 +53,9 @@ angular.module('awsTestApp')
 
         $scope.stop = function (instance) {
             alert('Stop ');
-            console.log(instance);
+
+            awsFactory.stopInstance.save(function (data) {
+            });
         };
 
     });

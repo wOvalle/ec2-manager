@@ -14,7 +14,7 @@ module.exports = {
 
     AWS_ACCESS_KEY_ID: 'AMAZONKEY',
     AWS_SECRET_ACCESS_KEY: 'AMAZONSECRET',
-    AWS_REGION: 'AMAZONREGION'//'us-east-1',
+    AWS_REGION: 'AMAZONREGION', // 'us-east-1',
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };
