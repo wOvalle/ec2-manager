@@ -3,12 +3,32 @@
 angular.module('awsTestApp')
     .controller('Ec2InstancesCtrl', function ($scope, awsFactory, $modal, $rootScope) {
         $scope.instances = [];
+        $scope.number = 0;
         var lModal;
         var singleInstanceModal;
 
         loadingModal();
 
         getInstances();
+
+
+
+        $scope.getListClass = function (i){
+            if(i % 2)
+                return 'list-group-item bg-color';
+            else
+                return 'list-group-item';
+        };
+
+
+        $scope.getBadgeClass = function (sName){
+            if(sName == "running")
+            return 'badge progress-bar-success icon-ok-sign';
+            else if(sName == "stopped")
+            return 'badge progress-bar-danger icon-remove-sign';
+            else
+            return 'badge progress-bar-warning';
+        };
 
         function getInstances() {
             awsFactory.getInstances()

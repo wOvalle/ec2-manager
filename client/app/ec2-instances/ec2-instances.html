@@ -4,10 +4,11 @@
     <p>List of EC2 Instances</p>
 
     <div class="list-group">
-        <div ng-repeat="instance in instances" class="list-group-item">
-            <a href ng-click="details(instance)">{{instance.Instances[0].InstanceName || "Blank name"}}</a> - ID:
+        <div ng-repeat="instance in instances" ng-class='getListClass($index);'>
+            [{{$index + 1}}] - <a href ng-click="details(instance)">{{instance.Instances[0].InstanceName || "Blank name"}}</a> - ID:
             {{instance.Instances[0].KeyName}}
-            <span class="badge" tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</span>
+            <a href ng-class='getBadgeClass(instance.Instances[0].State.Name)' ng-click='window.alert(instance.Instances[0].StateTransitionReason);' tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</a>
+
         </div>
     </div>
 </div>
