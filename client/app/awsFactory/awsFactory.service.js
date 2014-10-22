@@ -18,6 +18,7 @@ angular.module('awsTestApp')
         };
 
         awsFactory.stopInstance = function (id, ins) {
+            console.log('stop instance');
             return $http.put(urlBase + '/' + id, ins)
         };
 

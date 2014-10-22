@@ -2,27 +2,33 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <h1>EC2 Manager!</h1>
+    <p class="lead">MEAN + AWS Javascript library</p>
+
   </div>
 </header>
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-    </div>
+      <p><h3>What's aws-test (EC2-Manager)?</h3></p>
+      <p>This is our final project of Enterprise Computing (NSSA60203.2141) (RIT-NSSA). It's a web application built in top of MEAN Stack (MongoDB, ExpressJS, AngularJS and NodeJS) with help of Yeoman, Bootstrap-ui and Amazon Web Services's NodeJS SDK. It's an Elastic Computing Cloud (EC2 from now on) manager created to query and Manage EC2 Instances.</p>
+      <p><h3>Installation</h3></p>
+      Clone the repo: git clone https://github.com/wOvalle/aws-test.git
+      or Download the .zip source code
+      Then run npm install && bower install
+
+      Create a file called local.env.js in aws-test\server\config with the same layout than local.env.sample.js and set your AMAZON_ID, AMAZON_SECRET and AWS_REGION with your id, secret and region from AWS (if you don't know how to get this, please refer to AWS Documentation
+
+      After everything is installed, just run grunt serve and test the app.
+
+      With love, from Dominican Republic
   </div>
 </div>
 
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+      <p>EC2-Manager|
+        <a href="https://github.com/wOvalle">@wOvalle</a> |
+         <a href="https://www.facebook.com/vianny.martinez">@Vianny</a></p>
   </div>
 </footer>
