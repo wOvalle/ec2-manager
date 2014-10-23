@@ -16,20 +16,25 @@ angular.module('awsTestApp')
         };
 
         $scope.getListClass = function (i){
-            if(i % 2)
+            if(i % 2){
                 return 'list-group-item bg-color';
-            else
+}
+            else{
                 return 'list-group-item';
+}
         };
 
 
         $scope.getBadgeClass = function (sName){
-            if(sName == "running")
+            if(sName === 'running'){
             return 'badge progress-bar-success icon-ok-sign';
-            else if(sName == "stopped")
+}
+            else if(sName === 'stopped'){
             return 'badge progress-bar-danger icon-remove-sign';
-            else
+}
+            else{
             return 'badge progress-bar-warning';
+}
         };
 
         function getInstances() {
