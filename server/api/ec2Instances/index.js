@@ -7,7 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
-router.post('/', controller.create);
+router.post('/', controller.start);
 router.delete('/:id', controller.terminate);
 router.put('/:id', controller.stop);
 

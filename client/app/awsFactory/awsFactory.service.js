@@ -13,8 +13,10 @@ angular.module('awsTestApp')
             return $http.get(urlBase + '/' + id);
         };
 
-        awsFactory.createInstance = function (ins) {
-            return $http.post(urlBase, ins);
+        awsFactory.startInstance = function (ins) {
+            console.log('start instance');
+
+            return $http.post(urlBase, {'InstanceId':ins});
         };
 
         awsFactory.stopInstance = function (id, ins) {

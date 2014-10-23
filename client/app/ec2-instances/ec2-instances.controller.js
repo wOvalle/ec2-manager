@@ -3,7 +3,6 @@
 angular.module('awsTestApp')
     .controller('Ec2InstancesCtrl', function ($scope, awsFactory, $modal, $rootScope) {
         $scope.instances = [];
-        $scope.number = 0;
         var lModal;
         var singleInstanceModal;
 
@@ -11,7 +10,11 @@ angular.module('awsTestApp')
 
         getInstances();
 
-
+        $scope.refresh = function (){
+            $scope.instances = [];
+            loadingModal();
+            getInstances();
+        };
 
         $scope.getListClass = function (i){
             if(i % 2)
@@ -84,13 +87,25 @@ angular.module('awsTestApp')
     .controller('instanceModalCtrl', function ($scope, $modalInstance, instance, $rootScope, awsFactory) {
 
         $scope.terminate = function (instance) {
-            awsFactory.terminateInstance($rootScope.selectedInstance.Instances[0].InstanceId)
+            console.log('terminate');
+//            awsFactory.terminateInstance($rootScope.selectedInstance.Instances[0].InstanceId)
+//                .success(function (data) {
+//                    alert('Instance terminated');
+//                    console.log(data);
+//                })
+//                .error(function (error) {
+//                    alert('error' + error);
+//                });
+        };
+
+        $scope.start = function (instance) {
+            awsFactory.startInstance($rootScope.selectedInstance.Instances[0].InstanceId)
                 .success(function (data) {
-                    alert('Instance terminated');
-                    console.log(data);
+                    alert('Instance started');
                 })
-                .error(function (error) {
-                    alert('error' + error);
+                .error(function (error, status, headers, config) {
+                    alert('error' + error.message);
+                    console.log(error);
                 });
         };
 
@@ -104,5 +119,7 @@ angular.module('awsTestApp')
                 });
 
         };
+
+
 
     });

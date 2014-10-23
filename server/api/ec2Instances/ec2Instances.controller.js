@@ -80,6 +80,23 @@ exports.stop = function(req, res) {
 
 };
 
+// start a ec2Instance
+exports.start = function(req, res) {
+    var params = {};
+    params.InstanceIds = [];
+    params.InstanceIds.push(req.body.InstanceId);
+    var ec2 = new aws.EC2({apiVersion: '2014-06-15'});
+
+    ec2.startInstances(params, function(err, data) {
+        if (err) handleError(res,err); // an error occurred
+        else {
+            if (!data) handleError(res, err);
+            res.json(data);          // successful response
+        }
+    });
+
+};
+
 function handleError(res, err) {
     return res.send(500, err);
 }
