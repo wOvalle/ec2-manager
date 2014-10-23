@@ -1,14 +1,23 @@
 <div class="modal-header">
-    <h3>TODO: Instance name!</h3>
+    <h3>{{selectedInstance.Instances[0].InstanceName || "Blank name"}} <b>[{{selectedInstance.Instances[0].InstanceType}}]</b></h3>
 </div>
 <div class="modal-body">
-    TODO:<br>
-    Instance value: value <br>
-    Instance value: value <br>
-    Instance value: value <br>
-    Instance value: value <br>
-    Instance value: value
-    {{selectedInstance.Instances[0].KeyName}} SelectedInstance
+    <table class="table table-condensed table-hover table-bordered table-striped">
+        <thead>
+        <tr class="active">
+            <th>#</th>
+            <th>Properties</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key,value) in selectedInstance.Instances[0]">
+            <td class="active">{{$index}}</td>
+            <td>{{key}}</td>
+            <td>{{value}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 <div class="modal-footer">

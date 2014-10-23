@@ -12,7 +12,6 @@ angular.module('awsTestApp')
 
         $scope.refresh = function (){
             $scope.instances = [];
-            loadingModal();
             getInstances();
         };
 
@@ -38,8 +37,8 @@ angular.module('awsTestApp')
                 .success(function (data) {
 //                  When data comes from the server, dismiss loadingModal
                     lModal.dismiss('cancel');
+                    $scope.instances = [];
 //                  Iterate over the instances (Reservations) to set the InstanceName
-
                     angular.forEach(data.Reservations, function (res) {
                         res.Instances[0].InstanceName = '';
                         var arr = res.Instances[0].Tags;
@@ -51,6 +50,7 @@ angular.module('awsTestApp')
 
                         $scope.instances.push(res);
                     });
+                    console.log($scope.instances);
                 })
                 .error(function (error) {
 
@@ -72,7 +72,7 @@ angular.module('awsTestApp')
             $rootScope.selectedInstance = ins;
             singleInstanceModal = $modal.open({
                 templateUrl: 'app/ec2-instances/instance.html',
-                size: 'sm',
+                size: 'lg',
                 controller: 'instanceModalCtrl',
                 resolve: {
                     instance: function () {
@@ -117,9 +117,6 @@ angular.module('awsTestApp')
                 .error(function (error) {
                     alert('error' + error);
                 });
-
         };
-
-
 
     });

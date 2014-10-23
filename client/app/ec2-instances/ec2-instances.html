@@ -1,18 +1,21 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-        <div class="container">
-            List of EC2 Instances
-            <button type="button" class="btn btn-default pull-right" ng-click="refresh()">
-                <span class="glyphicon glyphicon-refresh"></span> Refresh instances
-            </button>
-        </div>
-        <br>
+<div class="container">
+    List of EC2 Instances
+    <button type="button" class="btn btn-default pull-right" ng-click="refresh()">
+        <span class="glyphicon glyphicon-refresh"></span> Refresh instances
+    </button>
+</div>
+<br>
+
 <div class="container">
     <div class="list-group">
         <div ng-repeat="instance in instances" ng-class='getListClass($index);'>
             [{{$index}}] - <a href ng-click="details(instance)">{{instance.Instances[0].InstanceName || "Blank name"}}</a> - ID:
-            {{instance.Instances[0].KeyName}}
-            <a href ng-class='getBadgeClass(instance.Instances[0].State.Name)' ng-click='window.alert(instance.Instances[0].StateTransitionReason);' tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</a>
+            {{instance.Instances[0].InstanceId}} <b>{{instance.Instances[0].InstanceType}}</b> arch:
+            {{instance.Instances[0].Architecture}}
+            <a href ng-class='getBadgeClass(instance.Instances[0].State.Name)'
+               tooltip="{{instance.Instances[0].StateTransitionReason}}">{{instance.Instances[0].State.Name}}</a>
         </div>
     </div>
 </div>
